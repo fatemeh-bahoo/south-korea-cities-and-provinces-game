@@ -15,10 +15,12 @@ user_guessed = []
 while len(user_guessed) < 17:
     user_answer = screen.textinput(title=f"{len(user_guessed)}/17 The Cities and Provinces Correct", prompt="What's another city name?\nType 'exit' if you want to stop playing").title()
     if user_answer == "Exit":
-        missing_data = []
-        for city in all_cities_provinces:
-            if city not in user_guessed:
-                missing_data.append(city)
+        missing_data = [city for city in all_cities_provinces if city not in user_guessed]
+        #We can use the line above or write the following 4 lines, the result is the same
+        # missing_data = []
+        # for city in all_cities_provinces:
+        #     if city not in user_guessed:
+        #         missing_data.append(city)
         data = pandas.DataFrame(missing_data)
         data.to_csv("missing_data.csv")
         break
